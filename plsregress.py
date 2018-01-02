@@ -75,7 +75,9 @@ class pls_decompose:
         return sl, inc, rsq, pv, sterr
     
     def __variance_explained__(self, Y, Yhat):
-        return 1 - np.var(Y - Yhat)/np.var(Y)
+        Yvar = np.var(Y, axis = 0)
+        diffvar = np.var(Y - Yhat, axis = 0)
+        return 1 - np.sum(diffvar)/np.sum(Yvar)
         
     def fit(self):
         
